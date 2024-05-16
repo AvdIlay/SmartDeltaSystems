@@ -13,7 +13,7 @@ public class StudentMapper {
             return null;
         }
         StudentDto dto = new StudentDto();
-        mapCommonFields(student, dto);
+        dtoToStudent(student, dto);
         return dto;
     }
 
@@ -22,11 +22,11 @@ public class StudentMapper {
             return null;
         }
         Student student = new Student();
-        mapCommonFields(dto, student);
+        studentToDto(dto, student);
         return student;
     }
 
-    private static void mapCommonFields(Student student, StudentDto dto) {
+    private static void dtoToStudent(Student student, StudentDto dto) {
         dto.setId(student.getId());
         dto.setFirstName(student.getFirstName());
         dto.setLastName(student.getLastName());
@@ -35,7 +35,7 @@ public class StudentMapper {
         dto.setAverageGrade(student.getAverageGrade());
     }
 
-    private static void mapCommonFields(StudentDto dto, Student student) {
+    private static void studentToDto(StudentDto dto, Student student) {
         student.setId(dto.getId());
         student.setFirstName(dto.getFirstName());
         student.setLastName(dto.getLastName());

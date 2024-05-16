@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
         if (applicationUser == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User " + username + " not found");
         }
         return new User(applicationUser.getUsername(), applicationUser.getPassword(), new ArrayList<>());
     }

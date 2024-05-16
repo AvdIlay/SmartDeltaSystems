@@ -2,7 +2,6 @@ package org.example.smartdeltasystems.controller;
 
 import org.example.smartdeltasystems.dto.StudentDto;
 import org.example.smartdeltasystems.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

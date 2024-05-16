@@ -4,7 +4,6 @@ import org.example.smartdeltasystems.dto.StudentDto;
 import org.example.smartdeltasystems.entity.Student;
 import org.example.smartdeltasystems.mapper.StudentMapper;
 import org.example.smartdeltasystems.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +20,16 @@ public class StudentService {
     }
 
     public List<StudentDto> getAllStudents() {
-        return studentRepository.findAll().stream().map(StudentMapper::toDto).collect(Collectors.toList());
+        return studentRepository.findAll()
+                .stream()
+                .map(StudentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public StudentDto getStudentById(Long id) {
-        return studentRepository.findById(id).map(StudentMapper::toDto).orElse(null);
+        return studentRepository.findById(id)
+                .map(StudentMapper::toDto)
+                .orElse(null);
     }
 
     public StudentDto createStudent(StudentDto studentDto) {
@@ -35,13 +39,16 @@ public class StudentService {
     }
 
     public StudentDto updateStudent(Long id, StudentDto studentDto) {
-        Student existingStudent = studentRepository.findById(id).orElse(null);
+        Student existingStudent = studentRepository.findById(id)
+                .orElse(null);
+
         if (existingStudent != null) {
             existingStudent.setLastName(studentDto.getLastName());
             existingStudent.setFirstName(studentDto.getFirstName());
             existingStudent.setMiddleName(studentDto.getMiddleName());
             existingStudent.setStudentGroup(studentDto.getStudentGroup());
             existingStudent.setAverageGrade(studentDto.getAverageGrade());
+
             return StudentMapper.toDto(studentRepository.save(existingStudent));
         } else {
             return null;

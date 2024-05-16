@@ -20,8 +20,12 @@ public class AuthService {
     private final ApplicationUserRepository applicationUserRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthService(AuthenticationManager authenticationManager, JwtService jwtService,
-                       ApplicationUserRepository applicationUserRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(
+            AuthenticationManager authenticationManager,
+            JwtService jwtService,
+            ApplicationUserRepository applicationUserRepository,
+            PasswordEncoder passwordEncoder
+    ) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.applicationUserRepository = applicationUserRepository;
@@ -40,16 +44,19 @@ public class AuthService {
     public String register(AuthRequestDto authRequestDto) {
 
         try {
-            Role role = Role.valueOf(authRequestDto.getRole());
+            Role.valueOf(authRequestDto.getRole());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid role: " + authRequestDto.getRole());
         }
 
         ApplicationUser user = new ApplicationUser();
+
         user.setUsername(authRequestDto.getUsername());
         user.setPassword(passwordEncoder.encode(authRequestDto.getPassword()));
         user.setRole(authRequestDto.getRole());
+
         applicationUserRepository.save(user);
+
         return "User registered successfully";
     }
 }
