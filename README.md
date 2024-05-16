@@ -1,11 +1,9 @@
 # Student Information REST Service
 
 ## Описание
-
 Этот проект представляет собой REST сервис для управления информацией о студентах. Сервис позволяет выполнять CRUD операции (создание, чтение, обновление, удаление) над сущностями студентов и включает OAuth2.0 авторизацию для обеспечения безопасности.
 
 ## Состав объекта студента
-
 - Фамилия (lastName)
 - Имя (firstName)
 - Отчество (middleName)
@@ -21,11 +19,12 @@
 - Maven для управления зависимостями
 
 ## API Эндпоинты
+
 # Регистрация нового пользователя
 curl -X POST http://localhost:8080/auth/register -H "Content-Type: application/json" -d '{
 "username": "user",
 "password": "password",
-"role": "USER_ROLE"
+"role": "ROLE_ADMIN"
 }'
 
 # Получение токена доступа
@@ -45,21 +44,26 @@ curl -X GET http://localhost:8080/students/{id} -H "Authorization: Bearer <acces
 
 # Создание нового студента
 curl -X POST http://localhost:8080/students -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" -d '{
-"lastName": "Иванов",
-"firstName": "Иван",
-"middleName": "Иванович",
+"lastName": "lastName",
+"firstName": "firstName",
+"middleName": "middleName",
 "studentGroup": "101",
 "averageGrade": 4.5
 }'
 
 # Обновление информации о студенте
 curl -X PUT http://localhost:8080/students/{id} -H "Content-Type: application/json" -H "Authorization: Bearer <access_token>" -d '{
-"lastName": "Петров",
-"firstName": "Петр",
-"middleName": "Петрович",
+"lastName": "newLastName",
+"firstName": "newFirstName",
+"middleName": "newMiddleName",
 "studentGroup": "102",
 "averageGrade": 4.7
 }'
 
 # Удаление студента
 curl -X DELETE http://localhost:8080/students/{id} -H "Authorization: Bearer <access_token>"
+
+
+## Запуск Приложения через Docker
+Перейдите в директорию docker и выполните команду: docker-compose up -d.
+API эндпоинты будут доступны на порту 8090.

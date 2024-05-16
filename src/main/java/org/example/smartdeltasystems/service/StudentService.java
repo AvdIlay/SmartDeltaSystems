@@ -13,8 +13,12 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public List<StudentDto> getAllStudents() {
         return studentRepository.findAll().stream().map(StudentMapper::toDto).collect(Collectors.toList());
